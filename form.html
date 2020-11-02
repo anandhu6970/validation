@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width>, initial-scale=1.0">
+    <title>Banking Registration form</title>
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+    </style>        
+</head>
+<body>
+    <center><h1>Banking Registration Form</h1></center>
+    <form name="myForm" style="border: 1px solid black; margin: 5px; padding: 20px;" onsubmit="return validate()" action="welcome.html">
+        ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" title="Minimum 5 & Maximum 20 digits" minlength="8" maxlength="20" placeholder="User ID" id="name">
+        <label id="lbid" style="color: rgb(202, 26, 26); visibility: hidden;">User Id is required</label><br><br>
+        Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" title="Full Name" placeholder="User Name" id="uname">
+        <label id="lbun" style="color: rgb(202, 26, 26); visibility: hidden;">User Name is required</label><br><br>
+        Account Type:&nbsp;&nbsp;&nbsp;<select id="acctyp" title="Choose any one">
+            <option value="">Select</option>
+            <option value=" Checking Account "> Checking Account </option>
+            <option value=" Savings Account "> Savings Account </option>
+            <option value=" A Money Market Account "> A Money Market Account </option>
+            <option value=" Certificates of Deposit (CD) "> Certificates of Deposit (CD) </option>
+            <option value=" IRA Account "> IRA Account </option>
+        </select>
+        <label id="lbactp" style="color: rgb(202, 26, 26); visibility: hidden;">Account type is required</label><br><br>
+        Address:&nbsp;&nbsp;&nbsp;<textarea rows="5" cols="50" title="Write your permanent address" placeholder="Permanent address" id="address"></textarea>
+        <label id="lbadd" style="color: rgb(202, 26, 26); visibility: hidden;">Address is required</label><br><br>
+        Email Id:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="email" title="Enter valid email id" placeholder="Email ID" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" id="email">
+        <label id="lbem" style="color: rgb(202, 26, 26); visibility: hidden;">Email Id is required</label><br><br>
+        Phone No:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+91-<input type="tel" title="Enter valid phone no" placeholder="Phone Number" minlength="10" maxlength="10" id="phno">
+        <label id="lbph" style="color: rgb(202, 26, 26); visibility: hidden;">Phone no. is required</label><br><br>
+        Address Proof:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" id="file" title="Choose only imagers of extention .jpg, .jpeg & .png" name="filename"onchange="return fileValidation()" >
+        <label id="lbap" style="color: rgb(202, 26, 26); visibility: hidden;">Attachment is required</label><br><br>
+        <input type="submit" title="Click to submit your responce" value="Submit" name="submit">
+    <script>
+        function validate()
+        {
+            let userid=document.getElementById("name");
+            let username=document.getElementById("uname");
+            let accounttype=document.getElementById("acctyp");
+            let address=document.getElementById("address");
+            let emailid=document.getElementById("email");
+            let phoneno=document.getElementById("phno");
+            let addressproof=document.getElementById("file")
+            if(userid.value.trim()=="")
+            {
+                document.getElementById("lbid").style.visibility="visible";
+                return false;
+            }
+            else if(username.value.trim()=="")
+            {
+                document.getElementById("lbun").style.visibility="visible";
+                return false;
+            }
+            else if(accounttype.value=="")
+            {
+                document.getElementById("lbactp").style.visibility="visible";
+                return false;
+            }
+            else if(address.value.trim()=="")
+            {
+                document.getElementById("lbadd").style.visibility="visible";
+                return false;
+            }
+            else if(emailid.value.trim()=="")
+            {
+                document.getElementById("lbem").style.visibility="visible";
+                return false;
+            }
+            else if(phoneno.value.trim()=="")
+            {
+                document.getElementById("lbph").style.visibility="visible";
+                return false;
+            }
+            else if(addressproof.value.trim()=="")
+            {
+                document.getElementById("lbap").style.visibility="visible";
+                return false;
+            }
+            else
+            {
+                true;
+            }
+        }
+        function fileValidation() { 
+            var fileInput =  
+                document.getElementById('file'); 
+              
+            var filePath = fileInput.value; 
+          
+            // Allowing file type 
+            var allowedExtensions =  
+                    /(\.jpg|\.jpeg|\.png)$/i; 
+              
+            if (!allowedExtensions.exec(filePath)) { 
+                alert('Invalid file type, only image file with extetion .jpg, .jpeg and .png file is accepted!'); 
+                fileInput.value = ''; 
+                return false; 
+            }  
+            else  
+            { 
+              
+                // Image preview 
+                if (fileInput.files && fileInput.files[0]) { 
+                    var reader = new FileReader(); 
+                    reader.onload = function(e) { 
+                        document.getElementById( 
+                            'imagePreview').innerHTML =  
+                            '<img src="' + e.target.result 
+                            + '"/>'; 
+                    }; 
+                      
+                    reader.readAsDataURL(fileInput.files[0]); 
+                } 
+            } 
+        }
+    </script>
+    </form>
+</body>
+</html>
